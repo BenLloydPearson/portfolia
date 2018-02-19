@@ -1,2 +1,2 @@
-# portfolia
+# Portfolia
 WordPress Portfolio Theme
