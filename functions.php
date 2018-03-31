@@ -36,9 +36,8 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             --------------------------------------------------------------*/
             
             /*---------------
-            // Customization Setting declarations
+            // Primary Text Color
             ---------------*/
-            // Default Color for p and h tags
             $wp_customize->add_setting(
                 'portfolia_primary_text_color',
                 array(
@@ -46,38 +45,6 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                     'transport' => 'postMessage'
                 )
             );
-            
-            //Hyperlink color
-            $wp_customize->add_setting(
-                'portfolia_secondary_text_color',
-                array(
-                    'default'     => '#73aca7',
-                    'transport' => 'postMessage' 
-                )
-            );
-            
-            //Navigation background color
-            $wp_customize->add_setting(
-                'portfolia_nav_background_color',
-                array(
-                    'default'     => '#136572',
-                    'transport' => 'postMessage'
-                )
-            );
-            
-            //Navigation button background color
-            $wp_customize->add_setting(
-                'portfolia_nav_button_color',
-                array(
-                    'default'     => '#063c53',
-                    'transport' => 'postMessage'
-                )
-            );
-            
-            
-            /*---------------
-            // Customization Setting Controls
-            ---------------*/
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
@@ -87,6 +54,17 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                         'section'    => 'colors',
                         'settings'   => 'portfolia_primary_text_color'
                     )
+                )
+            );
+            
+            /*---------------
+            // Secondary Text Color
+            ---------------*/
+            $wp_customize->add_setting(
+                'portfolia_secondary_text_color',
+                array(
+                    'default'     => '#73aca7',
+                    'transport' => 'postMessage' 
                 )
             );
             $wp_customize->add_control(
@@ -100,6 +78,17 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                     )
                 )
             );
+            
+            /*---------------
+            // Navigation Background Color
+            ---------------*/
+            $wp_customize->add_setting(
+                'portfolia_nav_background_color',
+                array(
+                    'default'     => '#136572',
+                    'transport' => 'postMessage'
+                )
+            );
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
@@ -110,7 +99,18 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                         'settings'   => 'portfolia_nav_background_color'
                     )
                 )
-            );            
+            );
+            
+            /*---------------
+            // Navigation Button Background Color
+            ---------------*/
+            $wp_customize->add_setting(
+                'portfolia_nav_button_color',
+                array(
+                    'default'     => '#063c53',
+                    'transport' => 'postMessage'
+                )
+            );
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
@@ -121,8 +121,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                         'settings'   => 'portfolia_nav_button_color'
                     )
                 )
-            ); 
-
+            );
         }
         function portfolia_customizer_css() {
             ?>
