@@ -40,7 +40,7 @@
 		} );
 	} );
     // Link text color.
-	wp.customize( 'portfolia_link_textcolor', function( value ) {
+	wp.customize( 'portfolia_secondary_text_color', function( value ) {
 		value.bind( function( to ) {
             $( '.site-content a' ).css( {
                 'color': to
@@ -48,21 +48,21 @@
 		} );
 	} );
     // :Left bar background color.
-	wp.customize( 'portfolia_left_background_color', function( value ) {
+	wp.customize( 'portfolia_nav_background_color', function( value ) {
 		value.bind( function( to ) {
             $( '.site-left' ).css( {
                 'background-color': to
             } );
 		} );
 	} );
-    wp.customize( 'portfolia_left_button_color', function( value ) {
+    wp.customize( 'portfolia_nav_button_color', function( value ) {
 		value.bind( function( to ) {
             $( '#primary-menu li' ).css( {
                 'background-color': to
             } );
 		} );
 	} );
-    wp.customize( 'portfolia_default_text_color', function( value ) {
+    wp.customize( 'portfolia_primary_text_color', function( value ) {
 		value.bind( function( to ) {
             $( 'p, h1, h2, h3, h4, h5, h6' ).css( {
                 'color': to
