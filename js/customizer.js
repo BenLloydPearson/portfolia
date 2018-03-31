@@ -64,7 +64,7 @@
 	} );
     wp.customize( 'portfolia_default_text_color', function( value ) {
 		value.bind( function( to ) {
-            $( 'p' ).css( {
+            $( 'p, h1, h2, h3, h4, h5, h6' ).css( {
                 'color': to
             } );
 		} );

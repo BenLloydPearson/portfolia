@@ -7,6 +7,13 @@
  * @package portfolia
  */
 
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Customization_Settings
+ ## Colors
+--------------------------------------------------------------*/
+
 if ( ! function_exists( 'portfolia_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -21,16 +28,56 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
         * Theme Color Customizer
         */
         function portfolia_register_theme_customizer( $wp_customize ) {
-
+            /*--------------------------------------------------------------
+            # Customization_Settings
+            --------------------------------------------------------------*/
+            /*--------------------------------------------------------------
+            ## Colors
+            --------------------------------------------------------------*/
+            
+            /*---------------
+            // Customization Setting declarations
+            ---------------*/
+            // Default Color for p and h tags
+            $wp_customize->add_setting(
+                'portfolia_default_text_color',
+                array(
+                    'default'     => '#303030',
+                    'transport' => 'postMessage'
+                )
+            );
+            
+            //Hyperlink color
             $wp_customize->add_setting(
                 'portfolia_link_textcolor',
                 array(
                     'default'     => '#73aca7',
-                    'transport' => 'postMessage'
-                    
+                    'transport' => 'postMessage' 
                 )
             );
-
+            
+            //Navigation background color
+            $wp_customize->add_setting(
+                'portfolia_left_background_color',
+                array(
+                    'default'     => '#136572',
+                    'transport' => 'postMessage'
+                )
+            );
+            
+            //Navigation button background color
+            $wp_customize->add_setting(
+                'portfolia_left_button_color',
+                array(
+                    'default'     => '#063c53',
+                    'transport' => 'postMessage'
+                )
+            );
+            
+            
+            /*---------------
+            // Customization Setting Controls
+            ---------------*/
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
@@ -42,14 +89,6 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                     )
                 )
             );
-            $wp_customize->add_setting(
-                'portfolia_left_background_color',
-                array(
-                    'default'     => '#136572',
-                    'transport' => 'postMessage'
-                )
-            );
-
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
@@ -60,15 +99,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                         'settings'   => 'portfolia_left_background_color'
                     )
                 )
-            );
-            $wp_customize->add_setting(
-                'portfolia_left_button_color',
-                array(
-                    'default'     => '#063c53',
-                    'transport' => 'postMessage'
-                )
-            );
-
+            );            
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
@@ -79,26 +110,18 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                         'settings'   => 'portfolia_left_button_color'
                     )
                 )
+            ); 
+            $wp_customize->add_control(
+                new WP_Customize_Color_Control(
+                    $wp_customize,
+                    'default_text_color',
+                    array(
+                        'label'      => __( 'Default Text Color', 'portfolia' ),
+                        'section'    => 'colors',
+                        'settings'   => 'portfolia_default_text_color'
+                    )
+                )
             );
-            $wp_customize->add_setting(
-        'portfolia_default_text_color',
-        array(
-            'default'     => '#303030',
-            'transport' => 'postMessage'
-        )
-    );
- 
-    $wp_customize->add_control(
-        new WP_Customize_Color_Control(
-            $wp_customize,
-            'default_text_color',
-            array(
-                'label'      => __( 'Default Text Color', 'portfolia' ),
-                'section'    => 'colors',
-                'settings'   => 'portfolia_default_text_color'
-            )
-        )
-    );
 
         }
         function portfolia_customizer_css() {
@@ -113,7 +136,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
                 #primary-menu li{ background-color: <?php echo get_theme_mod( 'portfolia_left_button_color' ); ?>; }
             </style>
             <style type="text/css">
-                p{ color: <?php echo get_theme_mod( 'portfolia_default_text_color' ); ?>; }
+                p, h1, h2, h3, h4, h5, h6{ color: <?php echo get_theme_mod( 'portfolia_default_text_color' ); ?>; }
             </style>
             <?php
         }
