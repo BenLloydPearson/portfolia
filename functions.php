@@ -20,12 +20,13 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
         /**
         * Theme Color Customizer
         */
-        function tcx_register_theme_customizer( $wp_customize ) {
+        function portfolia_register_theme_customizer( $wp_customize ) {
 
             $wp_customize->add_setting(
-                'tcx_link_color',
+                'portfolia_link_textcolor',
                 array(
-                    'default'     => '#000000',
+                    'default'     => '#73aca7',
+                    'transport' => 'postMessage'
                     
                 )
             );
@@ -33,54 +34,57 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
-                    'link_color',
+                    'portfolia_link_textcolor',
                     array(
-                        'label'      => __( 'Link Color', 'tcx' ),
+                        'label'      => __( 'Link Text Color', 'portfolia' ),
                         'section'    => 'colors',
-                        'settings'   => 'tcx_link_color'
+                        'settings'   => 'portfolia_link_textcolor'
                     )
                 )
             );
             $wp_customize->add_setting(
-                'tcx_left_background_color',
+                'portfolia_left_background_color',
                 array(
-                    'default'     => '#000000'
+                    'default'     => '#136572',
+                    'transport' => 'postMessage'
                 )
             );
 
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
-                    'left_background_color',
+                    'portfolia_left_background_color',
                     array(
-                        'label'      => __( 'Left Background Color', 'tcx' ),
+                        'label'      => __( 'Left Background Color', 'portfolia' ),
                         'section'    => 'colors',
-                        'settings'   => 'tcx_left_background_color'
+                        'settings'   => 'portfolia_left_background_color'
                     )
                 )
             );
             $wp_customize->add_setting(
-                'tcx_left_button_color',
+                'portfolia_left_button_color',
                 array(
-                    'default'     => '#000000'
+                    'default'     => '#063c53',
+                    'transport' => 'postMessage'
                 )
             );
 
             $wp_customize->add_control(
                 new WP_Customize_Color_Control(
                     $wp_customize,
-                    'left_button_color',
+                    'portfolia_left_button_color',
                     array(
-                        'label'      => __( 'Left Button Color', 'tcx' ),
+                        'label'      => __( 'Left Button Color', 'portfolia' ),
                         'section'    => 'colors',
-                        'settings'   => 'tcx_left_button_color'
+                        'settings'   => 'portfolia_left_button_color'
                     )
                 )
             );
             $wp_customize->add_setting(
-        'tcx_default_text_color',
+        'portfolia_default_text_color',
         array(
-            'default'     => '#303030'
+            'default'     => '#303030',
+            'transport' => 'postMessage'
         )
     );
  
@@ -89,32 +93,32 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             $wp_customize,
             'default_text_color',
             array(
-                'label'      => __( 'Default Text Color', 'tcx' ),
+                'label'      => __( 'Default Text Color', 'portfolia' ),
                 'section'    => 'colors',
-                'settings'   => 'tcx_default_text_color'
+                'settings'   => 'portfolia_default_text_color'
             )
         )
     );
 
         }
-        function tcx_customizer_css() {
+        function portfolia_customizer_css() {
             ?>
             <style type="text/css">
-                a { color: <?php echo get_theme_mod( 'tcx_link_color' ); ?>; }
+                .site-content a{ color: <?php echo get_theme_mod( 'portfolia_link_textcolor' ); ?>; }
             </style>
             <style type="text/css">
-                .site-left { background-color: <?php echo get_theme_mod( 'tcx_left_background_color' ); ?>; }
+                .site-left { background-color: <?php echo get_theme_mod( 'portfolia_left_background_color' ); ?>; }
             </style>
             <style type="text/css">
-                #primary-menu li{ background-color: <?php echo get_theme_mod( 'tcx_left_button_color' ); ?>; }
+                #primary-menu li{ background-color: <?php echo get_theme_mod( 'portfolia_left_button_color' ); ?>; }
             </style>
             <style type="text/css">
-                p{ color: <?php echo get_theme_mod( 'tcx_default_text_color' ); ?>; }
+                p{ color: <?php echo get_theme_mod( 'portfolia_default_text_color' ); ?>; }
             </style>
             <?php
         }
-        add_action( 'wp_head', 'tcx_customizer_css' );
-        add_action( 'customize_register', 'tcx_register_theme_customizer' );
+        add_action( 'wp_head', 'portfolia_customizer_css' );
+        add_action( 'customize_register', 'portfolia_register_theme_customizer' );
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.

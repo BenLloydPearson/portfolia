@@ -39,4 +39,34 @@
 			}
 		} );
 	} );
+    // Link text color.
+	wp.customize( 'portfolia_link_textcolor', function( value ) {
+		value.bind( function( to ) {
+            $( '.site-content a' ).css( {
+                'color': to
+            } );
+		} );
+	} );
+    // :Left bar background color.
+	wp.customize( 'portfolia_left_background_color', function( value ) {
+		value.bind( function( to ) {
+            $( '.site-left' ).css( {
+                'background-color': to
+            } );
+		} );
+	} );
+    wp.customize( 'portfolia_left_button_color', function( value ) {
+		value.bind( function( to ) {
+            $( '#primary-menu li' ).css( {
+                'background-color': to
+            } );
+		} );
+	} );
+    wp.customize( 'portfolia_default_text_color', function( value ) {
+		value.bind( function( to ) {
+            $( 'p' ).css( {
+                'color': to
+            } );
+		} );
+	} );
 } )( jQuery );
