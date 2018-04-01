@@ -22,12 +22,29 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
 	 * runs before the init hook. The init hook is too late for some features, such
 	 * as indicating support for post thumbnails.
 	 */
+
+    /*--------------------------------------------------------------
+    # Define global variables
+    --------------------------------------------------------------*/
+    $primary_text_color = '#303030';
+    $secondary_text_color = '#73aca7';
+    $nav_background_color = '#136572';
+    $nav_button_color = '#063c53';
+
 	function portfolia_setup() {
+        
         
         /**
         * Theme Color Customizer
         */
         function portfolia_register_theme_customizer( $wp_customize ) {
+            /*--------------------------------------------------------------
+            # Declare global variables
+            --------------------------------------------------------------*/
+            global $primary_text_color;
+            global $secondary_text_color;
+            global $nav_background_color;
+            global $nav_button_color;
             /*--------------------------------------------------------------
             # Customization_Settings
             --------------------------------------------------------------*/
@@ -41,7 +58,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             $wp_customize->add_setting(
                 'portfolia_primary_text_color',
                 array(
-                    'default'     => '#303030',
+                    'default'     => $primary_text_color,
                     'transport' => 'postMessage'
                 )
             );
@@ -63,7 +80,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             $wp_customize->add_setting(
                 'portfolia_secondary_text_color',
                 array(
-                    'default'     => '#73aca7',
+                    'default'     => $secondary_text_color,
                     'transport' => 'postMessage' 
                 )
             );
@@ -85,7 +102,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             $wp_customize->add_setting(
                 'portfolia_nav_background_color',
                 array(
-                    'default'     => '#136572',
+                    'default'     => $nav_background_color,
                     'transport' => 'postMessage'
                 )
             );
@@ -107,7 +124,7 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             $wp_customize->add_setting(
                 'portfolia_nav_button_color',
                 array(
-                    'default'     => '#063c53',
+                    'default'     => $nav_button_color,
                     'transport' => 'postMessage'
                 )
             );
@@ -124,18 +141,25 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
             );
         }
         function portfolia_customizer_css() {
+            /*--------------------------------------------------------------
+            # Declare global variables
+            --------------------------------------------------------------*/
+            global $primary_text_color;
+            global $secondary_text_color;
+            global $nav_background_color;
+            global $nav_button_color;
             ?>
             <style type="text/css">
-                .site-content a{ color: <?php echo get_theme_mod( 'portfolia_secondary_text_color' ); ?>; }
+                .site-content a{ color: <?php echo get_theme_mod( 'portfolia_secondary_text_color', $secondary_text_color ); ?>; }
             </style>
             <style type="text/css">
-                .site-left { background-color: <?php echo get_theme_mod( 'portfolia_nav_background_color' ); ?>; }
+                .site-left { background-color: <?php echo get_theme_mod( 'portfolia_nav_background_color', $nav_background_color ); ?>; }
             </style>
             <style type="text/css">
-                #primary-menu li{ background-color: <?php echo get_theme_mod( 'portfolia_nav_button_color' ); ?>; }
+                #primary-menu li{ background-color: <?php echo get_theme_mod( 'portfolia_nav_button_color', $nav_button_color); ?>; }
             </style>
             <style type="text/css">
-                p, h1, h2, h3, h4, h5, h6{ color: <?php echo get_theme_mod( 'portfolia_primary_text_color' ); ?>; }
+                p, h1, h2, h3, h4, h5, h6{ color: <?php echo get_theme_mod( 'portfolia_primary_text_color', $primary_text_color ); ?>; }
             </style>
             <?php
         }
