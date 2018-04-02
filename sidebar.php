@@ -12,6 +12,15 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 }
 ?>
 
-<aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->
+<?php
+/**
+ * Sidebar displays empty message if no sidebar has been created.
+ */
+?>
+<div id="sidebar-primary" class="sidebar">
+    <?php if ( is_active_sidebar( 'primary' ) ) : ?>
+        <?php dynamic_sidebar( 'primary' ); ?>
+    <?php else : ?>
+        Time to add some widgets!
+    <?php endif; ?>
+</div>
