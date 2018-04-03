@@ -44,33 +44,231 @@ function custom_menu_page_removing() {
 }
 add_action( 'admin_menu', 'custom_menu_page_removing' );
 
-/*-------------------
- ## Experience
- ------------------*/
-function create_post_experience() {
-        register_post_type( 'experience',
-            array(
-                'labels'       => array(
-                    'name'       => __( 'Experience' ),
-                ),
-                'public'       => true,
-                'hierarchical' => true,
-                'has_archive'  => true,
-                'supports'     => array(
-                    'title',
-                    'editor',
-                    'thumbnail',
-                ), 
-                'taxonomies'   => array(
-                    'post_tag',
-                    'category',
-                )
+
+function create_custom_post_types() {
+    /*-------------------
+     ## Experience
+     ------------------*/
+    register_post_type( 'experience',
+        array(
+            'labels'       => array(
+                'name'       => __( 'Experience' ),
+                'set_featured_image'    => __( 'Set Logo / Image'),
+                'featured_image'    => __( 'Logo / Image'),
+                'remove_image'    => __( 'Remove Logo / Image'),
+                'use_featured_image'    => __( 'Use Logo / Image'),
+                'add_new_item'       => __( 'Add New Experience' ),
+                'new_item'       => __( 'New Experience' ),
+                'edit_item'       => __( 'Edit Experience' ),
+                'view_item'       => __( 'View Experience' ),
+                'search_items'       => __( 'Search Experience' ),
+                'not_found'       => __( 'No Experience Found' ),
+                'archives'       => __( 'Experience Archives' ),
+                'attributes'       => __( 'Experience Attributes' ),
+                'insert_into_item'       => __( 'Insert into Experience' ),
+                'upload_to_this_item'       => __( 'Upload to Experience' ),
+            ),
+            'public'       => true,
+            'hierarchical' => true,
+            'has_archive'  => true,
+            'menu_position' => 2,
+            'supports'     => array(
+                'title',
+                'editor',
+                'thumbnail',
+            ), 
+            'taxonomies'   => array(
+                'post_tag',
+                'category',
             )
-        );
-        register_taxonomy_for_object_type( 'category', 'experience' );
-        register_taxonomy_for_object_type( 'post_tag', 'experience' );
-    }
-    add_action( 'init', 'create_post_experience' );
+        )
+    );
+    register_taxonomy_for_object_type( 'category', 'experience' );
+    register_taxonomy_for_object_type( 'post_tag', 'experience' );
+    
+    /*-------------------
+     ## Education
+     ------------------*/
+    register_post_type( 'education',
+        array(
+            'labels'       => array(
+                'name'       => __( 'Education' ),
+                'set_featured_image'    => __( 'Set Logo / Image'),
+                'featured_image'    => __( 'Logo / Image'),
+                'remove_image'    => __( 'Remove Logo / Image'),
+                'use_featured_image'    => __( 'Use Logo / Image'),
+                'add_new_item'       => __( 'Add New Education' ),
+                'new_item'       => __( 'New Education' ),
+                'edit_item'       => __( 'Edit Education' ),
+                'view_item'       => __( 'View Education' ),
+                'search_items'       => __( 'Search Education' ),
+                'not_found'       => __( 'No Education Found' ),
+                'archives'       => __( 'Education Archives' ),
+                'attributes'       => __( 'Education Attributes' ),
+                'insert_into_item'       => __( 'Insert into Education' ),
+                'upload_to_this_item'       => __( 'Upload to Education' ),
+            ),
+            'public'       => true,
+            'hierarchical' => true,
+            'has_archive'  => true,
+            'menu_position' => 3,
+            'supports'     => array(
+                'title',
+                'editor',
+                'thumbnail',
+            ), 
+            'taxonomies'   => array(
+                'post_tag',
+                'category',
+            )
+        )
+    );
+    register_taxonomy_for_object_type( 'category', 'education' );
+    register_taxonomy_for_object_type( 'post_tag', 'education' );
+    
+    /*-------------------
+     ## Project
+     ------------------*/
+    register_post_type( 'projects',
+        array(
+            'labels'       => array(
+                'name'       => __( 'Projects' ),
+                'singular_name' => __( 'Project' ),
+                'add_new_item'       => __( 'Add New Project' ),
+                'new_item'       => __( 'New Project' ),
+                'edit_item'       => __( 'Edit Project' ),
+                'view_item'       => __( 'View Project' ),
+                'search_items'       => __( 'Search Project' ),
+                'not_found'       => __( 'No Project Found' ),
+                'archives'       => __( 'Project Archives' ),
+                'attributes'       => __( 'Project Attributes' ),
+                'insert_into_item'       => __( 'Insert into Project' ),
+                'upload_to_this_item'       => __( 'Upload to Project' ),
+            ),
+            'public'       => true,
+            'hierarchical' => true,
+            'has_archive'  => true,
+            'menu_position' => 4,
+            'supports'     => array(
+                'title',
+                'editor',
+            ), 
+            'taxonomies'   => array(
+                'post_tag',
+                'category',
+            )
+        )
+    );
+    register_taxonomy_for_object_type( 'category', 'projects' );
+    register_taxonomy_for_object_type( 'post_tag', 'projects' );
+        /*-------------------
+     ## Certification
+     ------------------*/
+    register_post_type( 'certifications',
+        array(
+            'labels'       => array(
+                'name'       => __( 'Certifications' ),
+                'singular_name' => __( 'Certification' ),
+                'add_new_item'       => __( 'Add New Certification' ),
+                'new_item'       => __( 'New Certification' ),
+                'edit_item'       => __( 'Edit Certification' ),
+                'view_item'       => __( 'View Certification' ),
+                'search_items'       => __( 'Search Certification' ),
+                'not_found'       => __( 'No Certification Found' ),
+                'archives'       => __( 'Certification Archives' ),
+                'attributes'       => __( 'Certification Attributes' ),
+                'insert_into_item'       => __( 'Insert into Certification' ),
+                'upload_to_this_item'       => __( 'Upload to Certification' ),
+            ),
+            'public'       => true,
+            'hierarchical' => true,
+            'has_archive'  => true,
+            'menu_position' => 5,
+            'supports'     => array(
+                'title',
+                'editor',
+            ), 
+            'taxonomies'   => array(
+                'post_tag',
+                'category',
+            )
+        )
+    );
+    register_taxonomy_for_object_type( 'category', 'certifications' );
+    register_taxonomy_for_object_type( 'post_tag', 'certifications' );
+    /*-------------------
+     ## Award / Recognition
+     ------------------*/
+    register_post_type( 'awards',
+        array(
+            'labels'       => array(
+                'name'       => __( 'Awards and Recognition' ),
+                'singular_name' => __( 'Award' ),
+                'add_new_item'       => __( 'Add New Award' ),
+                'new_item'       => __( 'New Award' ),
+                'edit_item'       => __( 'Edit Award' ),
+                'view_item'       => __( 'View Award' ),
+                'search_items'       => __( 'Search Award' ),
+                'not_found'       => __( 'No Award Found' ),
+                'archives'       => __( 'Award Archives' ),
+                'attributes'       => __( 'Award Attributes' ),
+                'insert_into_item'       => __( 'Insert into Award' ),
+                'upload_to_this_item'       => __( 'Upload to Award' ),
+            ),
+            'public'       => true,
+            'hierarchical' => true,
+            'has_archive'  => true,
+            'menu_position' => 6,
+            'supports'     => array(
+                'title',
+                'editor',
+            ), 
+            'taxonomies'   => array(
+                'post_tag',
+                'category',
+            )
+        )
+    );
+    register_taxonomy_for_object_type( 'category', 'awards' );
+    register_taxonomy_for_object_type( 'post_tag', 'awards' );
+    /*-------------------
+     ## Publication
+     ------------------*/
+    register_post_type( 'Publications',
+        array(
+            'labels'       => array(
+                'name'       => __( 'Publications' ),
+                'singular_name' => __( 'Publication' ),
+                'add_new_item'       => __( 'Add New Publication' ),
+                'new_item'       => __( 'New Publication' ),
+                'edit_item'       => __( 'Edit Publication' ),
+                'view_item'       => __( 'View Publication' ),
+                'search_items'       => __( 'Search Publication' ),
+                'not_found'       => __( 'No Publication Found' ),
+                'archives'       => __( 'Publication Archives' ),
+                'attributes'       => __( 'Publication Attributes' ),
+                'insert_into_item'       => __( 'Insert into Publication' ),
+                'upload_to_this_item'       => __( 'Upload to Publication' ),
+            ),
+            'public'       => true,
+            'hierarchical' => true,
+            'has_archive'  => true,
+            'menu_position' => 6,
+            'supports'     => array(
+                'title',
+                'editor',
+            ), 
+            'taxonomies'   => array(
+                'post_tag',
+                'category',
+            )
+        )
+    );
+    register_taxonomy_for_object_type( 'category', 'Publications' );
+    register_taxonomy_for_object_type( 'post_tag', 'Publications' );
+    
+}
+add_action( 'init', 'create_custom_post_types' );
 
 /*--------------------------------------------------------------
  # Custom fields and meta boxes
