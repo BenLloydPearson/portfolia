@@ -71,7 +71,7 @@ function create_custom_post_types() {
             'public'       => true,
             'hierarchical' => true,
             'has_archive'  => true,
-            'menu_position' => 2,
+            'menu_position' => 2.1,
             'supports'     => array(
                 'title',
                 'editor',
@@ -111,7 +111,7 @@ function create_custom_post_types() {
             'public'       => true,
             'hierarchical' => true,
             'has_archive'  => true,
-            'menu_position' => 3,
+            'menu_position' => 2.2,
             'supports'     => array(
                 'title',
                 'editor',
@@ -148,7 +148,7 @@ function create_custom_post_types() {
             'public'       => true,
             'hierarchical' => true,
             'has_archive'  => true,
-            'menu_position' => 4,
+            'menu_position' => 2.3,
             'supports'     => array(
                 'title',
                 'editor',
@@ -183,7 +183,7 @@ function create_custom_post_types() {
             'public'       => true,
             'hierarchical' => true,
             'has_archive'  => true,
-            'menu_position' => 5,
+            'menu_position' => 2.4,
             'supports'     => array(
                 'title',
                 'editor',
@@ -218,7 +218,7 @@ function create_custom_post_types() {
             'public'       => true,
             'hierarchical' => true,
             'has_archive'  => true,
-            'menu_position' => 6,
+            'menu_position' => 2.5,
             'supports'     => array(
                 'title',
                 'editor',
@@ -253,7 +253,7 @@ function create_custom_post_types() {
             'public'       => true,
             'hierarchical' => true,
             'has_archive'  => true,
-            'menu_position' => 6,
+            'menu_position' => 2.6,
             'supports'     => array(
                 'title',
                 'editor',
