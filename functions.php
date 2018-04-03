@@ -15,7 +15,7 @@
 --------------------------------------------------------------*/
 
 if ( ! function_exists( 'portfolia_setup' ) ) :
-	/**
+    /**
 	 * Sets up theme defaults and registers support for various WordPress features.
 	 *
 	 * Note that this function is hooked into the after_setup_theme hook, which
@@ -305,4 +305,5 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 
 }
+
 

@@ -30,3 +30,65 @@ function portfolia_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'portfolia_pingback_header' );
+
+/*--------------------------------------------------------------
+ # Custom post types
+ --------------------------------------------------------------*/
+/*-------------------
+ ## Remove Uneccessary post types
+ ------------------*/
+function custom_menu_page_removing() {
+    remove_menu_page( 'edit.php?post_type=page' );    //Pages
+    remove_menu_page( 'edit.php' );                   //Posts
+    remove_menu_page( 'edit-comments.php' );          //Comments
+}
+add_action( 'admin_menu', 'custom_menu_page_removing' );
+
+/*-------------------
+ ## Experience
+ ------------------*/
+function create_post_experience() {
+        register_post_type( 'experience',
+            array(
+                'labels'       => array(
+                    'name'       => __( 'Experience' ),
+                ),
+                'public'       => true,
+                'hierarchical' => true,
+                'has_archive'  => true,
+                'supports'     => array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ), 
+                'taxonomies'   => array(
+                    'post_tag',
+                    'category',
+                )
+            )
+        );
+        register_taxonomy_for_object_type( 'category', 'experience' );
+        register_taxonomy_for_object_type( 'post_tag', 'experience' );
+    }
+    add_action( 'init', 'create_post_experience' );
+
+/*--------------------------------------------------------------
+ # Custom fields and meta boxes
+ --------------------------------------------------------------*/
+/*-------------------
+ ## Start Date
+ ------------------*/
+function add_start_date_meta_box() {
+    /*
+    * Look here: https://www.taniarascia.com/wordpress-part-three-custom-fields-and-metaboxes/
+    */
+	add_meta_box(
+		'start_date_meta_box', // $id
+		'Start Date', // $title
+		'show_start_date_meta_box', // $callback
+		'experience', // $screen
+		'normal', // $context
+		'high' // $priority
+	);
+}
+add_action( 'add_meta_boxes', 'add_start_date_meta_box' );
