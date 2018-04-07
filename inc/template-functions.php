@@ -271,22 +271,74 @@ function create_custom_post_types() {
 add_action( 'init', 'create_custom_post_types' );
 
 /*--------------------------------------------------------------
- # Custom fields and meta boxes
+ # Custom meta boxes and fields
  --------------------------------------------------------------*/
 /*-------------------
  ## Start Date
  ------------------*/
-function add_custom_meta_boxes() {
-    /*
-    * Look here: https://www.taniarascia.com/wordpress-part-three-custom-fields-and-metaboxes/
-    */
-	add_meta_box(
-		'start_date_meta_box', // $id
-		'Start Date', // $title
-		'show_start_date_meta_box', // $callback
-		'experience', // $screen
-		'normal', // $context
-		'high' // $priority
-	);
+
+//Generate meta boxes based on the post type
+add_action( 'add_meta_boxes', 'add_custom_meta_box' );
+function add_custom_meta_box($postType) {
+    //arrays to define which post types get which meta boxes
+    $all_dates = array('experience', education);
+	
+    if(in_array($postType, $all_dates)){
+		add_meta_box(
+				'date_test_meta_box', // $id
+                'Dates', // $title
+                'show_date_fields_meta_box', // $callback
+                $postType, // $screen
+                'normal', // $context
+                'high' // $priority
+		);
+	}
 }
-add_action( 'add_meta_boxes', 'add_custom_meta_boxes' );
+
+function show_date_fields_meta_box() {
+	global $post;  
+		$meta = get_post_meta( $post->ID, 'custom_fields', true ); ?>
+
+	<input type="hidden" name="your_meta_box_nonce" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
+    <!-- Start Date -->
+    <p>
+        <label for="custom_fields[start_date]">Start Date</label>
+        <br>
+        <input type="date" name="custom_fields[start_date]" id="custom_fields[start_date]]" class="regular-text" value="<?php if ( isset ( $meta['start_date'] ) ) echo $meta['start_date']; ?>">
+    </p>
+    <!-- End Date -->
+    <p>
+        <label for="custom_fields[end_date]">End Date</label>
+        <br>
+        <input type="date" name="custom_fields[end_date]" id="custom_fields[end_date]]" class="regular-text" value="<?php if ( isset ( $meta['end_date'] ) ) echo $meta['end_date']; ?>">
+    </p>
+
+	<?php }
+function save_custom_fields_meta( $post_id ) {   
+	// verify nonce
+	if ( !wp_verify_nonce( $_POST['your_meta_box_nonce'], basename(__FILE__) ) ) {
+		return $post_id; 
+	}
+	// check autosave
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id;
+	}
+	// check permissions
+	if ( 'page' === $_POST['post_type'] ) {
+		if ( !current_user_can( 'edit_page', $post_id ) ) {
+			return $post_id;
+		} elseif ( !current_user_can( 'edit_post', $post_id ) ) {
+			return $post_id;
+		}  
+	}
+	
+	$old = get_post_meta( $post_id, 'custom_fields', true );
+	$new = $_POST['custom_fields'];
+
+	if ( $new && $new !== $old ) {
+		update_post_meta( $post_id, 'custom_fields', $new );
+	} elseif ( '' === $new && $old ) {
+		delete_post_meta( $post_id, 'custom_fields', $old );
+	}
+}
+add_action( 'save_post', 'save_custom_fields_meta' );
