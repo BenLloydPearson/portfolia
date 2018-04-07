@@ -276,7 +276,7 @@ add_action( 'init', 'create_custom_post_types' );
 /*-------------------
  ## Start Date
  ------------------*/
-function add_start_date_meta_box() {
+function add_custom_meta_boxes() {
     /*
     * Look here: https://www.taniarascia.com/wordpress-part-three-custom-fields-and-metaboxes/
     */
@@ -289,4 +289,4 @@ function add_start_date_meta_box() {
 		'high' // $priority
 	);
 }
-add_action( 'add_meta_boxes', 'add_start_date_meta_box' );
+add_action( 'add_meta_boxes', 'add_custom_meta_boxes' );
