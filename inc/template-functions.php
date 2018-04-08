@@ -281,6 +281,8 @@ add_action( 'init', 'create_custom_post_types' );
 add_action( 'add_meta_boxes', 'add_custom_meta_box' );
 function add_custom_meta_box($postType) {
     //recursive search function to find $postType in multidimensional arrays
+    // Not being used right now, but keeping it here for reference.
+    /*
     function in_array_r($needle, $haystack, $strict = false) {
         foreach ($haystack as $item) {
             if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && in_array_r($needle, $item, $strict))) {
@@ -291,14 +293,13 @@ function add_custom_meta_box($postType) {
         return false;
         //Function copied from user jwueller: https://stackoverflow.com/a/4128377
     }
+    */
+    
     //arrays to define which post types get which meta boxes
     //all_dates get both a start and end date
     $all_dates = array('experience', 'education');
     //end_date gets only the completion date
-    $end_date = array(
-        array('projects', 'Completion Date'),
-        array('publications', 'Publication Date')
-    );
+    $end_date = array('projects', 'publications', 'certifications', 'awards');
 	
     if(in_array($postType, $all_dates)){
 		add_meta_box(
@@ -311,7 +312,7 @@ function add_custom_meta_box($postType) {
 		);
 	}
     
-    if (in_array_r($postType, $end_date)) {        
+    if (in_array($postType, $end_date)) {        
         add_meta_box(
                 'date_meta_box', // $id
                 'Date', // $title
@@ -325,7 +326,7 @@ function add_custom_meta_box($postType) {
 
 function show_all_date_fields_meta_box() {
 	global $post;  
-		$meta = get_post_meta( $post->ID, 'custom_fields', true ); ?>
+    $meta = get_post_meta( $post->ID, 'custom_fields', true ); ?>
 
 	<input type="hidden" name="your_meta_box_nonce" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
     <!-- Start Date -->
@@ -345,12 +346,27 @@ function show_all_date_fields_meta_box() {
 
 function show_end_date_fields_meta_box() {
 	global $post;  
-    $meta = get_post_meta( $post->ID, 'custom_fields', true ); ?>
+    $meta = get_post_meta( $post->ID, 'custom_fields', true ); 
+    $postType = $post->post_type;
+    
+    if($postType == 'projects'){
+        $title = "Completion Date";
+    }elseif($postType == 'publications'){
+        $title = "Publication Date";
+    }elseif($postType == 'awards'){
+        $title = "Award Date";
+    } elseif($postType == 'certifications'){
+        $title = "Certification Date";
+    }
+    else {
+        $title = "End Date";
+    }
+    ?>    
 
 	<input type="hidden" name="your_meta_box_nonce" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
     <!-- End Date -->
     <p>
-        <label for="custom_fields[end_date]">End Date</label>
+        <label for="custom_fields[end_date]"><?php echo $title ?></label>
         <br>
         <input type="date" name="custom_fields[end_date]" id="custom_fields[end_date]]" class="regular-text" value="<?php if ( isset ( $meta['end_date'] ) ) echo $meta['end_date']; ?>">
     </p>
