@@ -305,7 +305,7 @@ function add_custom_meta_box($postType) {
 		add_meta_box(
 				'date_meta_box', // $id
                 'Dates', // $title
-                'show_all_date_fields_meta_box', // $callback
+                'render_all_date_fields_meta_box', // $callback
                 $postType, // $screen
                 'normal', // $context
                 'high' // $priority
@@ -316,16 +316,25 @@ function add_custom_meta_box($postType) {
         add_meta_box(
                 'date_meta_box', // $id
                 'Date', // $title
-                'show_end_date_fields_meta_box', // $callback
+                'render_end_date_fields_meta_box', // $callback
                 $postType, // $screen
                 'normal', // $context
                 'high' // $priority
         );
     }
 }
+function render_all_date_fields_meta_box() {
+    global $post;
+    show_start_date_fields_meta_box($post);
+    show_end_date_fields_meta_box($post);
+}
 
-function show_all_date_fields_meta_box() {
-	global $post;  
+function render_end_date_fields_meta_box(){
+    global $post;
+    show_end_date_fields_meta_box($post);
+}
+function show_start_date_fields_meta_box($post) {
+	//global $post;  
     $meta = get_post_meta( $post->ID, 'custom_fields', true ); ?>
 
 	<input type="hidden" name="your_meta_box_nonce" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
@@ -335,17 +344,11 @@ function show_all_date_fields_meta_box() {
         <br>
         <input type="date" name="custom_fields[start_date]" id="custom_fields[start_date]]" class="regular-text" value="<?php if ( isset ( $meta['start_date'] ) ) echo $meta['start_date']; ?>">
     </p>
-    <!-- End Date -->
-    <p>
-        <label for="custom_fields[end_date]">End Date</label>
-        <br>
-        <input type="date" name="custom_fields[end_date]" id="custom_fields[end_date]]" class="regular-text" value="<?php if ( isset ( $meta['end_date'] ) ) echo $meta['end_date']; ?>">
-    </p>
 
 	<?php }
 
-function show_end_date_fields_meta_box() {
-	global $post;  
+function show_end_date_fields_meta_box($post) {
+	//global $post;  
     $meta = get_post_meta( $post->ID, 'custom_fields', true ); 
     $postType = $post->post_type;
     
