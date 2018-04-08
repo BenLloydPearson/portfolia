@@ -165,6 +165,19 @@ if ( ! function_exists( 'portfolia_setup' ) ) :
         }
         add_action( 'wp_head', 'portfolia_customizer_css' );
         add_action( 'customize_register', 'portfolia_register_theme_customizer' );
+        
+        // Update CSS within in Admin
+        function admin_style() {
+          wp_enqueue_style('admin-styles', get_template_directory_uri().'/layouts/admin-styles.css');
+        }
+        add_action('admin_enqueue_scripts', 'admin_style');
+        
+        
+        // Update JavaScript within in Admin
+        function admin_script() {
+          wp_enqueue_script('admin-javascript', get_template_directory_uri().'/js/theme-functions.js', array ( 'jquery' ), 1.1, true);
+        }
+        add_action('admin_enqueue_scripts', 'admin_script');
 		/*
 		 * Make theme available for translation.
 		 * Translations can be filed in the /languages/ directory.

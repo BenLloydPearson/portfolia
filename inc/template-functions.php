@@ -334,7 +334,6 @@ function render_end_date_fields_meta_box(){
     show_end_date_fields_meta_box($post);
 }
 function show_start_date_fields_meta_box($post) {
-	//global $post;  
     $meta = get_post_meta( $post->ID, 'custom_fields', true ); ?>
 
 	<input type="hidden" name="your_meta_box_nonce" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
@@ -342,7 +341,7 @@ function show_start_date_fields_meta_box($post) {
     <p>
         <label for="custom_fields[start_date]">Start Date</label>
         <br>
-        <input type="date" name="custom_fields[start_date]" id="custom_fields[start_date]]" class="regular-text" value="<?php if ( isset ( $meta['start_date'] ) ) echo $meta['start_date']; ?>">
+        <input type="date" name="custom_fields[start_date]" id="custom_fields[start_date]]" value="<?php if ( isset ( $meta['start_date'] ) ) echo $meta['start_date']; ?>">
     </p>
 
 	<?php }
@@ -369,10 +368,27 @@ function show_end_date_fields_meta_box($post) {
 	<input type="hidden" name="your_meta_box_nonce" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
     <!-- End Date -->
     <p>
-        <label for="custom_fields[end_date]"><?php echo $title ?></label>
+        <label for="custom-fields-end-date"><?php echo $title ?></label>
         <br>
-        <input type="date" name="custom_fields[end_date]" id="custom_fields[end_date]]" class="regular-text" value="<?php if ( isset ( $meta['end_date'] ) ) echo $meta['end_date']; ?>">
+        <input 
+               type="date" 
+               name="custom_fields[end_date]" 
+               id="custom-fields-end-date" 
+               class=<?php if ( $meta['end_date_checkbox'] === 'checkbox' ){ echo "disabled-field";} else {echo "enabled-field";} ?> 
+               value="<?php if ( isset ( $meta['end_date'] ) && ($meta['end_date_checkbox'] != 'checkbox') ) echo $meta['end_date']; ?>">
+        <label for="custom_fields[end_date_checkbox]">Ongoing?
+            <input type="checkbox" 
+                   id="custom-fields-end-date-checkbox"
+                   name="custom_fields[end_date_checkbox]"
+                   onclick="toggleBoxVisibility(event)"
+                   value="checkbox" <?php if ( $meta['end_date_checkbox'] === 'checkbox' ) echo 'checked'; ?>>
+        </label>
     </p>
+    
+    <?php 
+        if ( $meta['checkbox'] === 'checkbox' ){
+            $meta['end_date'] = '';
+        } ?>
 
 	<?php }
 
