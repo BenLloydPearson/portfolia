@@ -1,7 +1,7 @@
 # Portfolia
 Portfolia is a WordPress theme for professionals to show off their education, projects, skills, and more.
 
-Please note: This is a very early version of this theme with minimal functionality. It is not meant to be used in production yet.
+Please note: This is a very early version of this theme with minimal functionality. It is not meant to be used in production.
 
 ## Installation
 1. Clone this into the wp-content/themes/ directory inside your WordPress installation.
